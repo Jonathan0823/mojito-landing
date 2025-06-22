@@ -9,6 +9,10 @@ const About = () => {
       type: "words",
     });
 
+    const subContentSplit = new SplitText(".sub-content", {
+      type: "lines",
+    });
+
     const scrollTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#about",
@@ -16,24 +20,25 @@ const About = () => {
       },
     });
 
-    scrollTimeline
-      .from(titleSplit.words, {
-        y: 50,
+    const allLines = [...titleSplit.words, ...subContentSplit.lines];
+    scrollTimeline.from(allLines, {
+      y: 50,
+      opacity: 0,
+      stagger: 0.01,
+      duration: 1,
+      ease: "power2.out",
+    });
+
+    scrollTimeline.from(
+      ".top-grid div, .bottom-grid div",
+      {
         opacity: 0,
-        stagger: 0.03,
         duration: 1,
-        ease: "expo.out",
-      })
-      .from(
-        ".top-grid div, .bottom-grid div",
-        {
-          opacity: 0,
-          duration: 1,
-          ease: "power1.inOut",
-          stagger: 0.04,
-        },
-        "-=0.5",
-      );
+        ease: "power1.inOut",
+        stagger: 0.02,
+      },
+      "-=0.5",
+    );
   }, []);
   return (
     <div id="about">
