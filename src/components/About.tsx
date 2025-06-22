@@ -1,4 +1,40 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/all";
+
+gsap.registerPlugin(SplitText);
 const About = () => {
+  useGSAP(() => {
+    const titleSplit = new SplitText("#about h2", {
+      type: "words",
+    });
+
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top 50%",
+      },
+    });
+
+    scrollTimeline
+      .from(titleSplit.words, {
+        y: 50,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 1,
+        ease: "expo.out",
+      })
+      .from(
+        ".top-grid div, .bottom-grid div",
+        {
+          opacity: 0,
+          duration: 1,
+          ease: "power1.inOut",
+          stagger: 0.04,
+        },
+        "-=0.5",
+      );
+  }, []);
   return (
     <div id="about">
       <div className="mb-16 md:px-0 px-5">
@@ -25,6 +61,38 @@ const About = () => {
                 More than 1000 happy customers
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="top-grid">
+        <div className="md:col-span-3">
+          <div className="noisy">
+            <img src="/images/abt1.png" alt="grid-img-1" />
+          </div>
+        </div>
+        <div className="md:col-span-6">
+          <div className="noisy">
+            <img src="/images/abt2.png" alt="grid-img-2" />
+          </div>
+        </div>
+        <div className="md:col-span-3">
+          <div className="noisy">
+            <img src="/images/abt5.png" alt="grid-img-5" />
+          </div>
+        </div>
+      </div>
+
+      <div className="bottom-grid">
+        <div className="md:col-span-8">
+          <div className="noisy">
+            <img src="/images/abt3.png" alt="grid-img-3" />
+          </div>
+        </div>
+
+        <div className="md:col-span-4">
+          <div className="noisy">
+            <img src="/images/abt4.png" alt="grid-img-4" />
           </div>
         </div>
       </div>
