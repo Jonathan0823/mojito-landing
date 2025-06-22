@@ -1,9 +1,36 @@
 import { useGSAP } from "@gsap/react";
 import { cocktailLists, mockTailLists } from "../constants";
 import gsap from "gsap";
+import { SplitText } from "gsap/all";
+
+gsap.registerPlugin(SplitText);
 
 const Cocktails = () => {
   useGSAP(() => {
+    const cocktailSplit = new SplitText(".popular", {
+      type: "lines",
+    });
+
+    const mockTailSplit = new SplitText(".loved", {
+      type: "lines",
+    });
+
+    const menuTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#cocktails",
+        start: "top 50%",
+      },
+    });
+
+    const bothLines = [...cocktailSplit.lines, ...mockTailSplit.lines];
+    menuTimeline.from(bothLines, {
+      y: 50,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power2.out",
+    });
+
     const parallaxTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#cocktails",
@@ -54,7 +81,6 @@ const Cocktails = () => {
               </li>
             ))}
           </ul>
-          k
         </div>
         <div className="loved">
           <h2>List of Loved Mocktails</h2>
@@ -71,7 +97,6 @@ const Cocktails = () => {
               </li>
             ))}
           </ul>
-          k
         </div>
       </div>
     </section>
