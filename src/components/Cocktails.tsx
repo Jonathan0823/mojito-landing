@@ -18,7 +18,7 @@ const Cocktails = () => {
     const menuTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#cocktails",
-        start: "top 40%",
+        start: "top 70%",
       },
     });
 
