@@ -3,8 +3,6 @@ import { cocktailLists, mockTailLists } from "../constants";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 
-gsap.registerPlugin(SplitText);
-
 const Cocktails = () => {
   useGSAP(() => {
     const cocktailSplit = new SplitText(".popular", {
