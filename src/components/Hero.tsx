@@ -31,6 +31,13 @@ const Hero = () => {
       delay: 1,
     });
 
+    gsap.from("#view-cocktails", {
+      opacity: 0,
+      duration: 1.5,
+      ease: "expo.out",
+      delay: 1.5,
+    });
+
     gsap
       .timeline({
         scrollTrigger: {
@@ -85,7 +92,9 @@ const Hero = () => {
                 creative flair, and timeline recipes - designed to deligt your
                 senses.
               </p>
-              <a href="#cocktails">View Cocktails</a>
+              <a id="view-cocktails" href="#cocktails">
+                View Cocktails
+              </a>
             </div>
           </div>
         </div>
